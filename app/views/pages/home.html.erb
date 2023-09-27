@@ -1,0 +1,21 @@
+<h1>Welcome to Random Image App</h1>
+
+<%= button_to "Randomize Image", random_image_path, remote: true, method: :post, id: "randomize-button" %>
+
+<div id="random-image-container">
+  <%= image_tag "", id: "random-image" %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const button = document.getElementById("randomize-button");
+    const imageContainer = document.getElementById("random-image-container");
+    const randomImage = document.getElementById("random-image");
+
+    button.addEventListener("ajax:success", function(event) {
+      const response = event.detail[0];
+      randomImage.src = response.image_url;
+      imageContainer.style.display = "block";
+    });
+  });
+</script>
